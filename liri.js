@@ -3,15 +3,31 @@ const axios = require('axios');
 var Spotify = require('node-spotify-api');
 var keys = require("./keys.js");
 var spotify = new Spotify(keys.spotify);
-// 1557ce71 OMDB API KEY
 var action = process.argv[2].toLowerCase();
 var searchMovie = process.argv.slice(3).join("+");
 var searchConcert = process.argv.slice(3).join("%20");
 var display = process.argv.slice(3).join(" ");
+var searchTerm = process.argv.slice(3);
 
-// function spotifySearch() {
-//    console.log("This is the spotify search");
-// };
+function spotifySearch() {
+    console.log(`\n\n========== SPOTIFY RESULTS FOR: ${display} ==========\n\n`);
+    if(process.argv.length === 3){
+        searchTerm = "Closer to Fine";
+    }
+    spotify.search({
+        type: "track",
+        query: searchTerm,
+        limit: 3,
+    }, function(err,data) {
+        if(err) {
+            return console.log("Error occurred: " + err);
+        }
+        for (var i = 0; i < data.tracks.items.length; i++) {
+ 
+        console.log(`--------------------\nArtist: ${data.tracks.items[i].artists[0].name}\nSong Name: ${data.tracks.items[i].name}\nSpotify Preview Link: ${data.tracks.items[i].preview_url}\nAlbum: ${data.tracks.items[i].album.name}\n--------------------\n\n`);
+    }
+    })
+ };
 
 function omdbSearch() {
     axios.get("http://www.omdbapi.com/?apikey=1557ce71&t=" + searchMovie)
@@ -29,7 +45,7 @@ function concertSearch() {
    console.log(`\n\n========== UPCOMING CONCERTS FOR: ${display} ==========\n\n`);
    axios.get("https://rest.bandsintown.com/artists/" + searchConcert + "/events?app_id=codingbootcamp").then(function (response) {
     for (var i = 0; i < response.data.length; i++) {
-        console.log(`----------\nVenue: ${response.data[i].venue.name}\nLocation: ${response.data[i].venue.city}, ${response.data[i].venue.region}, ${response.data[i].venue.country}\nDate: ${response.data[i].datetime}\n----------\n\n`);
+        console.log(`--------------------\nVenue: ${response.data[i].venue.name}\nLocation: ${response.data[i].venue.city}, ${response.data[i].venue.region}, ${response.data[i].venue.country}\nDate: ${response.data[i].datetime}\n--------------------\n\n`);
     }; 
    });
 };
@@ -39,9 +55,9 @@ function doWhatItSays() {
 };
 
 switch(action) {
-//    case "spotify-this-song":
-//        spotifySearch();
-//        break;
+   case "spotify-this-song":
+       spotifySearch();
+       break;
    case "movie-this":
        omdbSearch();
        break;

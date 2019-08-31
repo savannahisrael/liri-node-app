@@ -7,32 +7,32 @@ The app also records a log.txt file for all commands and results.
 
 ## spotify-this-song
 
-<img src="./assets/images/spotify-this.gif">
+<img src="spotify-this.gif">
 
 When the user enters `node liri.js spotify-this-song (song name)`, Liri uses the song name to search on the Spotify API. Information about the first five songs are returned. This info includes the song name, album title, artists, and a link to the song preview on Spotify. This is also appended to the log.txt file.
 
-<img src="./assets/images/spotify-log.png">
+<img src="spotify-log.png">
 
 
 ## concert-this
 
-<img src="./assets/images/concert-this.gif"> 
+<img src="concert-this.gif"> 
 
 When the user enters `node liri.js concert-this (band name)`, Liri uses the band name to search on the Bands In Town API. It will then return the venue, location, and date of upcoming concerts. This is also appended to the log.txt file.
 
-<img src="./assets/images/concert-log.png">
+<img src="concert-log.png">
 
 
 ## movie-this
 
-<img src="./assets/images/movie-this.gif">
+<img src="movie-this.gif">
 
 When the user enters `node liri.js movie-this (movie title)`, Liri uses movie title to search on the OMDB API. Information about the movie, including the title, year produced, location, actors, ratings, and plot are returned. This information is also appended to the log.txt file.
 
 
 ## do-what-it-says
 
-<img src="./assets/images/do-what-it-says.gif">
+<img src="do-what-it-says.gif">
 
 When the user enters `node liri.js do-what-it-says`, Liri reads a text file and executes what is contained in there. Currently, the random.txt file contains:
 > concert-this,"Maggie Rogers"
